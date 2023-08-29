@@ -12,7 +12,8 @@ from arguments import buildParser
 from biopandas.pdb import PandasPdb
 import subprocess
 
-parent_path = os.getcwd()
+current_path = os.getcwd()
+workspace = os.path.dirname(os.getcwd()) + "/spaceQA/"
 
 class EvaluateMetrics(object) : 
     def __init__(self, gt, pred) -> None:
@@ -26,6 +27,7 @@ class EvaluateMetrics(object) :
         
         args = buildParser().parse_args()
         self.clean_path = args.clean_pdb_dir
+        self.job_name = args.name
                 
         pass
     
@@ -81,16 +83,16 @@ class EvaluateMetrics(object) :
             union_num = t.sum(u)
             return (common_num / union_num).item()
     
-    def cal_lddt(self, tool_path='scripts/tool/', target_folder='single_chain_pdb') : 
+    def cal_lddt(self, target_folder='single_chain_pdb') : 
         
-        if not os.path.exists(tool_path + target_folder) : 
-            os.mkdir(tool_path + target_folder)
+        if not os.path.exists(workspace + self.job_name + '/' + target_folder) : 
+            os.mkdir(workspace + self.job_name + '/' + target_folder)
         
+        os.chdir(workspace + self.job_name)
         single_chain(self.gt, _type='true_')
         single_chain(self.pred)
         
-        os.chdir(tool_path)
-        run_command = "bash lDDT.sh pred_" + self.pred_name + " true_" + self.gt_name
+        run_command = "bash " + current_path + "/scripts/tool/lDDT.sh pred_" + self.pred_name + " true_" + self.gt_name
         os.system(run_command)
         
         f=open('pred_' + self.pred_pdb + '_score.txt')
@@ -100,7 +102,7 @@ class EvaluateMetrics(object) :
         
         os.remove('pred_' + self.pred_pdb + '_score.txt')    
         shutil.rmtree(target_folder)
-        os.chdir(parent_path)
+        os.chdir(current_path)
         
         return t.tensor(score).to(t.float32)
     
@@ -111,25 +113,25 @@ class EvaluateMetrics(object) :
         
         return abs(gt_dm - pred_dm).to(t.float32)
     
-    def meanDockQ(self, tool_path='scripts/tool/') : 
+    def meanDockQ(self) : 
         
         C = PandasPdb().read_pdb(self.pred).df['ATOM']['chain_id']
         chains = list(set(C))
         if len(chains) == 1 : 
-            lddt_cmd = 'lddt ' + self.pred + ' ' + self.gt + ' > ' + self.pred_pdb + '_lddt.txt'
-            get_cmd = "awk '$1==\"Global\"{print $4}' " + self.pred_pdb + "_lddt.txt"
-            rm_cmd = 'rm ' + self.pred_pdb + "_lddt.txt"
+            lddt_cmd = 'lddt ' + self.pred + ' ' + self.gt + ' > ' + workspace + self.job_name + '/' + self.pred_pdb + '_1lddt.txt'
+            get_cmd = "awk '$1==\"Global\"{print $4}' "  + workspace + self.job_name + '/' + self.pred_pdb + "_1lddt.txt"
+            rm_cmd = 'rm ' + workspace + self.job_name + '/' + self.pred_pdb + "_1lddt.txt"
             os.system(lddt_cmd)
             global_lddt = subprocess.getoutput(get_cmd)
             os.system(rm_cmd)
             return t.tensor(float(global_lddt)).to(t.float32)
             
         
-        os.chdir(tool_path)
+        os.chdir(workspace + self.job_name)
         if os.path.exists(self.pred_pdb + '_value.txt') : 
             os.remove(self.pred_pdb + '_value.txt')
             
-        run_cmd = "bash DockQ.sh " + self.gt + " " + self.pred
+        run_cmd = "bash " + current_path + "/scripts/tool/DockQ.sh " + self.gt + " " + self.pred
         os.system(run_cmd)
         
         f=open(self.pred_pdb + '_value.txt')
@@ -140,7 +142,7 @@ class EvaluateMetrics(object) :
         os.remove(self.pred_pdb + '_value.txt')
         dq = t.tensor(dq)
         
-        os.chdir(parent_path)
+        os.chdir(current_path)
         
         return t.mean(dq).to(t.float32)
     

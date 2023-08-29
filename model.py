@@ -33,9 +33,9 @@ from scripts.utils import contact_mask, judge_contact
 def GCloss(n, e, tr, mse = nn.MSELoss(), smooth = nn.SmoothL1Loss()) :
     
     
-    l1 = smooth(n['plddt'], tr['lddt'])
-    l2 = mse(n['score'][0][0], t.mean(tr['interface score']))
-    l3 = mse(n['score'][0][1], tr['mean DockQ'])
+    l1 = smooth(n['plddt'], tr['lddt']) * 100
+    l2 = smooth(n['score'][0][0], t.mean(tr['interface score'])) * 100
+    l3 = smooth(n['score'][0][1], tr['mean DockQ']) * 100
     
     sum_smooth = nn.SmoothL1Loss(size_average = False)
     dim = tr['deviation map'].size(0)
@@ -46,7 +46,7 @@ def GCloss(n, e, tr, mse = nn.MSELoss(), smooth = nn.SmoothL1Loss()) :
     if l4 > 50 : 
         l4 = t.tensor(50)
 
-    l = (l1 + l2 + l3 + l4) / 4
+    l = (l1 + l2 + l3) / 3
 
     return l, [l1, l2, l3, l4]
     

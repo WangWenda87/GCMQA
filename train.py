@@ -98,7 +98,7 @@ def main() :
     
     wandb.init(
         # set the wandb project where this run will be logged
-        project="gcmqa_cpu_temp0",
+        project="gcmqa_cpu_three_loss_mean",
 
         # track hyperparameters and run metadata
         config={

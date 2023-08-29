@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/users/u2021103648/workspace/cpuQA/scripts/tool/CArmsd.py", line 56, in <module>
+    data = pd.DataFrame(data = RMSD,index = None,columns = 'RMSD')
+  File "/users/u2021103648/workspace/anaconda3/envs/GCMQA/lib/python3.10/site-packages/pandas/core/frame.py", line 762, in __init__
+    mgr = ndarray_to_mgr(
+  File "/users/u2021103648/workspace/anaconda3/envs/GCMQA/lib/python3.10/site-packages/pandas/core/internals/construction.py", line 345, in ndarray_to_mgr
+    index, columns = _get_axes(
+  File "/users/u2021103648/workspace/anaconda3/envs/GCMQA/lib/python3.10/site-packages/pandas/core/internals/construction.py", line 753, in _get_axes
+    columns = ensure_index(columns)
+  File "/users/u2021103648/workspace/anaconda3/envs/GCMQA/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 7333, in ensure_index
+    return Index._with_infer(index_like, copy=copy)
+  File "/users/u2021103648/workspace/anaconda3/envs/GCMQA/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 716, in _with_infer
+    result = cls(*args, **kwargs)
+  File "/users/u2021103648/workspace/anaconda3/envs/GCMQA/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 545, in __new__
+    raise cls._scalar_data_error(data)
+TypeError: Index(...) must be called with a collection of some kind, 'RMSD' was passed

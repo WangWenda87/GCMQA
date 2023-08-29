@@ -10,9 +10,9 @@ import wandb
 from scripts.utils import remove_noca, fix_pdb
 
 workspace = os.path.dirname(os.getcwd()) + "/spaceQA/"
-os.environ['WANDB_DIR'] = os.getcwd() + "/wandb/"
-os.environ['WANDB_CACHE_DIR'] = os.getcwd() + "/wandb/.cache/"
-os.environ['WANDB_CONFIG_DIR'] = os.getcwd() + "/wandb/.config/"
+os.environ['WANDB_DIR'] = workspace + args.name + "/wandb/"
+os.environ['WANDB_CACHE_DIR'] = workspace + args.name + "/wandb/.cache/"
+os.environ['WANDB_CONFIG_DIR'] = workspace + args.name + "/wandb/.config/"
 
 def randomSeed(random_seed):
     if random_seed is not None:
@@ -103,7 +103,7 @@ def main() :
     
     wandb.init(
         # set the wandb project where this run will be logged
-        project="gcmqa_cpu_temp0",
+        project="three loss mean",
 
         # track hyperparameters and run metadata
         config={

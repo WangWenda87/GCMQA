@@ -50,7 +50,7 @@ def update(pdb : str, base_chain : str, add_chain : str) :
     os.remove(add_chain + '.pdb')
     return None
 
-def single_chain(pdb: str, single_chain_folder='scripts/tool/single_chain_pdb/', _type='pred_') : 
+def single_chain(pdb: str, single_chain_folder='single_chain_pdb/', _type='pred_') : 
     name = pdb.split('/')[-1].split('.')[0]
     chain_list = chains(pdb)[0]
     chain_num = chains(pdb)[1]

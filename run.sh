@@ -17,7 +17,7 @@
 ### 指定该作业在哪个队列上执行
 ###SBATCH --partition=gpu-v100
 ###SBATCH --gres=gpu:1
-#SBATCH --partition=cpu64c
+#SBATCH --partition=cpu64c1t
 
 ### 以上参数用来申请所需资源
 ### 以下命令将在计算节点执行

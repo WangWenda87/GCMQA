@@ -1,23 +1,0 @@
-wandb: WARNING Path /users/u2021103648/workspace/spaceQA/three_loss_eps_CPU/wandb/wandb/ wasn't writable, using system temp directory.
-wandb: WARNING Path /users/u2021103648/workspace/spaceQA/three_loss_eps_CPU/wandb/wandb/ wasn't writable, using system temp directory
-wandb: Currently logged in as: wander87. Use `wandb login --relogin` to force relogin
-wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: wandb version 0.15.9 is available!  To upgrade, please run:
-wandb:  $ pip install wandb --upgrade
-wandb: Tracking run with wandb version 0.15.8
-wandb: Run data is saved locally in /users/u2021103648/workspace/spaceQA/three_loss_eps_CPU/wandb/wandb/run-20230831_145317-28jmsmdp
-wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run magic-shape-3
-wandb: ⭐️ View project at https://wandb.ai/wander87/three%20loss%20mean
-wandb: 🚀 View run at https://wandb.ai/wander87/three%20loss%20mean/runs/28jmsmdp
-Torch Device being used:  cpu
-wandb prepared
-Testing on 10747 protein directories:
-Dataset length:  53738
-Let's use 0 GPUs and Data Parallel Model.
-cpu
-Training data    :  37618
-Validation data  :  5373
-Testing data     :  10747
-wandb: Network error (ConnectTimeout), entering retry loop.
-/var/spool/slurm/d/job221320/slurm_script: line 32: 54932 Killed                  python train.py
-slurmstepd: error: Detected 4 oom-kill event(s) in StepId=221320.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.

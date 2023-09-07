@@ -30,12 +30,12 @@ from scripts.utils import contact_mask, judge_contact
 #         l = (l1 + l2 + l3 + l4) / 4
 #         return l, [l1, l2, l3, l4]
 
-def GCloss(n, e, tr, mse = nn.MSELoss(), smooth = nn.SmoothL1Loss()) :
+def GCloss(n, e, tr, mse = nn.MSELoss(), smooth = nn.SmoothL1Loss(), eps=1e-5) :
     
     
-    l1 = smooth(n['plddt'], tr['lddt']) * 100
-    l2 = smooth(n['score'][0][0], t.mean(tr['interface score'])) * 100
-    l3 = smooth(n['score'][0][1], tr['mean DockQ']) * 100
+    l1 = smooth(n['plddt'], tr['lddt']) * 100 + eps
+    l2 = smooth(n['score'][0][0], t.mean(tr['interface score'])) * 100 + eps
+    l3 = smooth(n['score'][0][1], tr['mean DockQ']) * 100 + eps
     
     sum_smooth = nn.SmoothL1Loss(size_average = False)
     dim = tr['deviation map'].size(0)

@@ -33,3 +33,30 @@
 2023-09-30 15:36:55,309 DEBUG   HandlerThread:32938 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
 2023-09-30 15:36:56,179 INFO    Thread-12 :32938 [dir_watcher.py:_on_file_created():271] file/dir created: /users/u2021103648/workspace/gcmqa/wandb/wandb/run-20230930_153653-vwkkgvjm/files/requirements.txt
 2023-09-30 15:36:56,180 INFO    Thread-12 :32938 [dir_watcher.py:_on_file_created():271] file/dir created: /users/u2021103648/workspace/gcmqa/wandb/wandb/run-20230930_153653-vwkkgvjm/files/conda-environment.yaml
+2023-09-30 15:37:16,214 INFO    Thread-12 :32938 [dir_watcher.py:_on_file_modified():288] file/dir modified: /users/u2021103648/workspace/gcmqa/wandb/wandb/run-20230930_153653-vwkkgvjm/files/conda-environment.yaml
+2023-09-30 15:37:16,259 DEBUG   HandlerThread:32938 [system_info.py:_save_conda():86] Saving conda packages done
+2023-09-30 15:37:16,266 INFO    HandlerThread:32938 [system_monitor.py:probe():216] Finished publishing system info
+2023-09-30 15:37:16,289 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: status_report
+2023-09-30 15:37:16,289 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: keepalive
+2023-09-30 15:37:16,290 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: status_report
+2023-09-30 15:37:16,290 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: keepalive
+2023-09-30 15:37:16,290 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: status_report
+2023-09-30 15:37:16,290 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: keepalive
+2023-09-30 15:37:16,291 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: status_report
+2023-09-30 15:37:16,291 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: keepalive
+2023-09-30 15:37:16,292 DEBUG   SenderThread:32938 [sender.py:send():379] send: files
+2023-09-30 15:37:16,293 INFO    SenderThread:32938 [sender.py:_save_file():1375] saving file wandb-metadata.json with policy now
+2023-09-30 15:37:16,307 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: stop_status
+2023-09-30 15:37:16,309 DEBUG   SenderThread:32938 [sender.py:send_request():406] send_request: stop_status
+2023-09-30 15:37:17,014 DEBUG   SenderThread:32938 [sender.py:send():379] send: telemetry
+2023-09-30 15:37:17,218 INFO    Thread-12 :32938 [dir_watcher.py:_on_file_created():271] file/dir created: /users/u2021103648/workspace/gcmqa/wandb/wandb/run-20230930_153653-vwkkgvjm/files/output.log
+2023-09-30 15:37:17,219 INFO    Thread-12 :32938 [dir_watcher.py:_on_file_created():271] file/dir created: /users/u2021103648/workspace/gcmqa/wandb/wandb/run-20230930_153653-vwkkgvjm/files/wandb-metadata.json
+2023-09-30 15:37:17,534 INFO    wandb-upload_0:32938 [upload_job.py:push():131] Uploaded file /tmp/tmplvrrvoqzwandb/xi8ckpzr-wandb-metadata.json
+2023-09-30 15:37:19,020 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: status_report
+2023-09-30 15:37:19,222 INFO    Thread-12 :32938 [dir_watcher.py:_on_file_modified():288] file/dir modified: /users/u2021103648/workspace/gcmqa/wandb/wandb/run-20230930_153653-vwkkgvjm/files/output.log
+2023-09-30 15:37:24,026 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: status_report
+2023-09-30 15:37:25,235 INFO    Thread-12 :32938 [dir_watcher.py:_on_file_modified():288] file/dir modified: /users/u2021103648/workspace/gcmqa/wandb/wandb/run-20230930_153653-vwkkgvjm/files/config.yaml
+2023-09-30 15:37:29,313 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: status_report
+2023-09-30 15:37:31,306 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: stop_status
+2023-09-30 15:37:31,308 DEBUG   SenderThread:32938 [sender.py:send_request():406] send_request: stop_status
+2023-09-30 15:37:34,585 DEBUG   HandlerThread:32938 [handler.py:handle_request():144] handle_request: status_report

@@ -22,3 +22,8 @@ config: {'learning_rate': 0.02, 'architecture': 'Graphormer', 'dataset': 'Comple
 2023-09-30 15:36:55,125 INFO    MainThread:32840 [wandb_run.py:_on_init():2189] got version response upgrade_message: "wandb version 0.15.11 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
 
 2023-09-30 15:36:55,125 INFO    MainThread:32840 [wandb_init.py:init():781] starting run threads in backend
+2023-09-30 15:37:16,306 INFO    MainThread:32840 [wandb_run.py:_console_start():2159] atexit reg
+2023-09-30 15:37:16,309 INFO    MainThread:32840 [wandb_run.py:_redirect():2014] redirect: wrap_raw
+2023-09-30 15:37:16,309 INFO    MainThread:32840 [wandb_run.py:_redirect():2079] Wrapping output streams.
+2023-09-30 15:37:16,309 INFO    MainThread:32840 [wandb_run.py:_redirect():2104] Redirects installed.
+2023-09-30 15:37:16,310 INFO    MainThread:32840 [wandb_init.py:init():822] run started, returning control to user process

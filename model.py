@@ -10,43 +10,22 @@ from scripts.multihead_attention import *
 from scripts.readout import NodeReadout, EdgeReadout
 from scripts.utils import contact_mask, judge_contact
 
-# class GCloss(nn.Module) : 
-    
-#     def __init__(self) -> None:
-#         super().__init__()
-        
-#     def forward(n, e, tr) : 
-        
-#         l1 = nn.MSELoss(n['plddt'], tr['lddt'])
-#         l2 = nn.MSELoss(n['score'][0][0], t.mean(tr['interface score']))
-#         l3 = nn.MSELoss(n['score'][0][1], tr['mean DockQ'])
-        
-#         sum_mse = nn.MSELoss(size_average = False)
-#         dim = tr['deviation map'].size(0)
-#         N = dim * (dim - 1) / 2
+def GCloss(n, e, tr, mse = nn.MSELoss(), smooth = nn.SmoothL1Loss(), eps=1e-5) :
 
-#         l4 = sum_mse(t.triu(e), t.triu(tr['deviation map'])) / N
+    l1 = smooth(n['plddt'], tr['lddt']) * 100 + eps
+    l2 = smooth(n['score'][0][0], t.mean(tr['interface score'])) * 100 + eps
+    l3 = smooth(n['score'][0][1], tr['mean DockQ']) * 100 + eps
 
-#         l = (l1 + l2 + l3 + l4) / 4
-#         return l, [l1, l2, l3, l4]
-
-def GCloss(n, e, tr, mse = nn.MSELoss(), smooth = nn.SmoothL1Loss()) :
-    
-    
-    l1 = smooth(n['plddt'], tr['lddt'])
-    l2 = mse(n['score'][0][0], t.mean(tr['interface score']))
-    l3 = mse(n['score'][0][1], tr['mean DockQ'])
-    
     sum_smooth = nn.SmoothL1Loss(size_average = False)
     dim = tr['deviation map'].size(0)
     N = dim * (dim - 1) / 2
 
     l4 = sum_smooth(t.triu(e), t.triu(tr['deviation map'])) / N
 
-    if l4 > 50 : 
+    if l4 > 50 :
         l4 = t.tensor(50)
 
-    l = (l1 + l2 + l3 + l4) / 4
+    l = (l1 + l2 + l3) / 3
 
     return l, [l1, l2, l3, l4]
     

@@ -1,20 +1,0 @@
-wandb: WARNING Path /users/u2021103648/workspace/spaceQA/weighted_lddt_CPU/wandb/wandb/ wasn't writable, using system temp directory.
-wandb: WARNING Path /users/u2021103648/workspace/spaceQA/weighted_lddt_CPU/wandb/wandb/ wasn't writable, using system temp directory
-wandb: Currently logged in as: wander87. Use `wandb login --relogin` to force relogin
-wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: wandb version 0.15.11 is available!  To upgrade, please run:
-wandb:  $ pip install wandb --upgrade
-wandb: Tracking run with wandb version 0.15.8
-wandb: Run data is saved locally in /users/u2021103648/workspace/spaceQA/weighted_lddt_CPU/wandb/wandb/run-20230930_142700-enzgyx8n
-wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run unique-meadow-6
-wandb: ⭐️ View project at https://wandb.ai/wander87/three%20loss%20mean
-wandb: 🚀 View run at https://wandb.ai/wander87/three%20loss%20mean/runs/enzgyx8n
-Torch Device being used:  cpu
-wandb prepared
-Testing on 10747 protein directories:
-Dataset length:  53738
-Let's use 0 GPUs and Data Parallel Model.
-cpu
-Training data    :  37618
-Validation data  :  5373
-Testing data     :  10747

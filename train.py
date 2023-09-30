@@ -102,7 +102,11 @@ def main() :
     
     wandb.init(
         # set the wandb project where this run will be logged
+<<<<<<< HEAD
         project="three loss mean",
+=======
+        project="gcmqa_cpu_three_mean_eps",
+>>>>>>> fc859084caa437d76e3bcdbc21f1d33c343739fa
 
         # track hyperparameters and run metadata
         config={

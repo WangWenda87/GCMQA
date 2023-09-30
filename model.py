@@ -11,22 +11,33 @@ from scripts.readout import NodeReadout, EdgeReadout
 from scripts.utils import contact_mask, judge_contact, cal_counts
 
 def GCloss(n, e, tr, mse = nn.MSELoss(), smooth = nn.SmoothL1Loss(), eps=1e-5) :
+<<<<<<< HEAD
     
     l1 = smooth(n['plddt'], tr['lddt']) * 100 + eps
     l2 = smooth(n['score'][0][0], t.mean(tr['interface score'])) * 100 + eps
     l3 = smooth(n['score'][0][1], tr['mean DockQ']) * 100 + eps
     
+=======
+
+    l1 = smooth(n['plddt'], tr['lddt']) * 100 + eps
+    l2 = smooth(n['score'][0][0], t.mean(tr['interface score'])) * 100 + eps
+    l3 = smooth(n['score'][0][1], tr['mean DockQ']) * 100 + eps
+
+>>>>>>> fc859084caa437d76e3bcdbc21f1d33c343739fa
     sum_smooth = nn.SmoothL1Loss(size_average = False)
     dim = tr['deviation map'].size(0)
     N = dim * (dim - 1) / 2
 
     l4 = sum_smooth(t.triu(e), t.triu(tr['deviation map'])) / N
 
-    if l4 > 50 : 
+    if l4 > 50 :
         l4 = t.tensor(50)
 
     l = (l1 + l2 + l3) / 3
+<<<<<<< HEAD
 
+=======
+>>>>>>> fc859084caa437d76e3bcdbc21f1d33c343739fa
 
     return l, [l1, l2, l3, l4]
   

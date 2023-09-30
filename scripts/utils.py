@@ -24,7 +24,7 @@ import scripts.tool.geomeas as gm
 import warnings
 warnings.filterwarnings("ignore")
 
-#os.getcwd()
+#print(os.getcwd())
 
 def remove_noca(pdb : str, out_pdb) : 
     
@@ -286,9 +286,6 @@ def contact_mask(pdb_path : str) -> t.Tensor :
     x = t.sum(c_map, dim=0)
     x[x != 0] = 1
     return x
-    
-# temp = contact_mask('2BNQ_tidy.pdb')
-# print(temp)
 
 # intra-chain and inter-chain contact counts
 def cal_counts(pdb : str, intra_counts = True) -> t.Tensor :

@@ -8,30 +8,9 @@ from scripts.build_graph import graph
 from scripts.embedding import node_init_embedding, edge_init_embedding
 from scripts.multihead_attention import *
 from scripts.readout import NodeReadout, EdgeReadout
-from scripts.utils import contact_mask, judge_contact
+from scripts.utils import contact_mask, judge_contact, cal_counts
 
-# class GCloss(nn.Module) : 
-    
-#     def __init__(self) -> None:
-#         super().__init__()
-        
-#     def forward(n, e, tr) : 
-        
-#         l1 = nn.MSELoss(n['plddt'], tr['lddt'])
-#         l2 = nn.MSELoss(n['score'][0][0], t.mean(tr['interface score']))
-#         l3 = nn.MSELoss(n['score'][0][1], tr['mean DockQ'])
-        
-#         sum_mse = nn.MSELoss(size_average = False)
-#         dim = tr['deviation map'].size(0)
-#         N = dim * (dim - 1) / 2
-
-#         l4 = sum_mse(t.triu(e), t.triu(tr['deviation map'])) / N
-
-#         l = (l1 + l2 + l3 + l4) / 4
-#         return l, [l1, l2, l3, l4]
-
-def GCloss(n, e, tr, mse = nn.MSELoss(), smooth = nn.SmoothL1Loss(), eps=1e-5) :
-    
+def GCloss(target, n, e, tr, mse = nn.MSELoss(), smooth = nn.SmoothL1Loss(), eps=1e-5) :
     
     l1 = smooth(n['plddt'], tr['lddt']) * 100 + eps
     l2 = smooth(n['score'][0][0], t.mean(tr['interface score'])) * 100 + eps
@@ -46,10 +25,14 @@ def GCloss(n, e, tr, mse = nn.MSELoss(), smooth = nn.SmoothL1Loss(), eps=1e-5) :
     if l4 > 50 : 
         l4 = t.tensor(50)
 
-    l = (l1 + l2 + l3) / 3
+    # l = (l1 + l2 + l3) / 3
+    counts = cal_counts(target, intra_counts=False) + 1
+    lddt = abs(n['plddt'] - tr['lddt']).squeeze(0).unsqueeze(-1)
+    print(lddt.size(), counts.size())
+    w_lddt = 100 * sum(counts * lddt) / sum(counts) + eps
 
-    return l, [l1, l2, l3, l4]
-    
+    return w_lddt, [l1, l2, l3, l4]
+  
 class GCQA(nn.Module) : 
     
     def __init__(self, **kwargs) -> None:
@@ -124,11 +107,10 @@ class GCQA(nn.Module) :
         
         return scores, deviation_map
     
-    def fit(self, scores, deviation_map, _label, pred=False) : 
+    def fit(self, target, scores, deviation_map, _label, pred=False) : 
         
-        self.loss = GCloss(scores, deviation_map, _label)[0]
-        #print(self.loss)
-        self.sub_loss = GCloss(scores, deviation_map, _label)[1]
+        self.loss = GCloss(target, scores, deviation_map, _label)[0]
+        self.sub_loss = GCloss(target, scores, deviation_map, _label)[1]
         
         if not pred:
             self.optimizer.zero_grad()

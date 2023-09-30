@@ -234,7 +234,7 @@ def Model(data_loader, model, epoch=None, evaluation=False, testing=False) :
 
             scores, deviation_map = model(input_pdb[0])
             assert deviation_map.size(0)  == _label['deviation map'].size(0) ,  "The dimension of predicted scores do not match with native labels"
-            model.fit(scores, deviation_map, _label)
+            model.fit(refer_gt[0], scores, deviation_map, _label)
         
         else:
 
@@ -243,7 +243,7 @@ def Model(data_loader, model, epoch=None, evaluation=False, testing=False) :
                 model.eval()
                 scores, deviation_map = model(input_pdb[0])
                 assert deviation_map.size(0)  == _label['deviation map'].size(0) ,  "The dimension of predicted scores do not match with native labels"
-                model.fit(scores, deviation_map, _label, pred=True)
+                model.fit(refer_gt[0], scores, deviation_map, _label, pred=True)
                 
         losses.update(model.loss.item(), batch_size)
         batch_local.update(model.sub_loss[0].item(), batch_size)

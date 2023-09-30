@@ -9,10 +9,13 @@ from scripts.embedding import edge_init_embedding, node_init_embedding
 from scripts.multihead_attention import *
 from scripts.readout import NodeReadout, EdgeReadout
 from scripts.build_graph import graph
+from loss import EvaluateMetrics
+from model import GCloss
 
 _name = '4YZE_clean'
 
 pdb = '/home/u2021103648/workspace/dataQA/clean_pdb/pred/' + _name + '.pdb'
+target = '/home/u2021103648/workspace/dataQA/clean_pdb/true/' + _name + '.pdb'
 pdb_graph = '/home/u2021103648/workspace/dataQA/dgl/' + _name + '.dgl'
 
 graph(pdb, _name, '/home/u2021103648/workspace/dataQA/dgl')
@@ -40,5 +43,9 @@ for i in range(12) :
 scores = node_readout(node, c_vec.squeeze(0))
 deviation_map = edge_readout(edge, c_map.unsqueeze(0))
 
-print(scores)
-print(deviation_map)
+# print(scores)
+# print(deviation_map)
+
+label = EvaluateMetrics(target, pdb).metric()
+l = GCloss(target, scores, deviation_map, label)
+print(l[0])

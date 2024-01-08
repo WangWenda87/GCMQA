@@ -17,7 +17,7 @@
 ### 指定该作业在哪个队列上执行
 ###SBATCH --partition=gpu-v100
 ###SBATCH --gres=gpu:1
-#SBATCH --partition=cpu64c
+#SBATCH --partition=cpu64c1t
 
 ### 以上参数用来申请所需资源
 ### 以下命令将在计算节点执行
@@ -29,4 +29,4 @@ export PATH=/users/u2021103648/workspace/anaconda3/bin/:$PATH
 source activate GCMQA
 
 ### 执行您的作业
-python train.py
+python norep_train.py

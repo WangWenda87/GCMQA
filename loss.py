@@ -156,7 +156,7 @@ class EvaluateMetrics(object) :
         
         return m
             
-# label = EvaluateMetrics('/extendplus/wander_W/QA/clean_pdb/true/1EKU_clean.pdb', '/extendplus/wander_W/QA/clean_pdb/pred/1EKU_clean.pdb').metric()
+# label = EvaluateMetrics('/home/u2021103648/workspace/dataQA/clean_pdb/true/1EKU_clean.pdb', '/home/u2021103648/workspace/dataQA/clean_pdb/pred/1EKU_clean.pdb').metric()
 # print(label)
 
 # print(cgat_loss(n, e, label))

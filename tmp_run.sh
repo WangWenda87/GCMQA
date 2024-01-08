@@ -29,4 +29,4 @@ export PATH=/users/u2021103648/workspace/anaconda3/bin/:$PATH
 source activate GCMQA
 
 ### 执行您的作业
-python train.py
+python tmp_train.py

@@ -2,8 +2,8 @@ from model import GCQA
 from data import get_train_val_test_loader, ComplexDataset
 from loss import EvaluateMetrics
 import config
-from arguments import buildParser
-# from arguments_bak import buildParser
+#from arguments import buildParser
+from arguments_norep import buildParser
 import sys, time, csv, os, random, math, argparse, gc
 import numpy as np
 import torch as t

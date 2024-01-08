@@ -4,11 +4,11 @@ def buildParser():
 	parser = configargparse.ArgParser(default_config_files=['settings.conf'])
 
 	# Data source
-	parser.add('--name',          default='weighted_lddt_CPU',                     help='Name of folder where result is saved')
+	parser.add('--name',          default='weighted_lddt_CPU_little_data',                     help='Name of folder where result is saved')
 	parser.add('--father_path', default='/home/u2021103648/workspace/dataQA/', help='father path')
 	parser.add('--clean_pdb_dir', default='/home/u2021103648/workspace/dataQA/clean_pdb/',          help='clean pdb folder')
-	parser.add('--protein_gt_list', default='/home/u2021103648/workspace/dataQA/gt_950.csv',          help='list where all protein native pdb files exist')
-	parser.add('--protein_pred_list', default='/home/u2021103648/workspace/dataQA/pred_950.csv',          help='list where all protein predicted pdb files exist')
+	parser.add('--protein_gt_list', default='/home/u2021103648/workspace/dataQA/gt50.csv',          help='list where all protein native pdb files exist')
+	parser.add('--protein_pred_list', default='/home/u2021103648/workspace/dataQA/pred50.csv',          help='list where all protein predicted pdb files exist')
 	parser.add('--dgl_dir',     default='/home/u2021103648/workspace/dataQA/dgl/',  help='Destination directory for dgls')
 	parser.add('--save_dir',    default='/home/u2021103648/workspace/dataQA/results/',      help='Destination directory for results')
 	parser.add('--pretrained',                                      help='Path to pretrained model')

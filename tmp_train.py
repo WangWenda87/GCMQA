@@ -2,8 +2,8 @@ from model import GCQA
 from data import get_train_val_test_loader, ComplexDataset
 from loss import EvaluateMetrics
 import config
-from arguments import buildParser
-# from arguments_bak import buildParser
+#from arguments import buildParser
+from arguments_bak import buildParser
 import sys, time, csv, os, random, math, argparse, gc
 import numpy as np
 import torch as t
@@ -166,7 +166,8 @@ def main() :
             print('Testing data     : ', len(test_loader.sampler))
     except Exception as e:
             print('\nException Cause: {}'.format(e.args[0]))
-    
+     
+    best_loss = float('inf')
     for epoch in range(args.epochs) : 
         [train_loss, train_local, train_interface, train_global, train_dev] = Model(train_loader, model, epoch=epoch)
         [val_loss, val_local, val_interface, val_global, val_dev] = Model(val_loader, model, epoch=epoch, evaluation=True)
@@ -175,12 +176,12 @@ def main() :
             print('Exit due to NaN')
             sys.exit(1)
             
-        is_best = val_loss < best_loss
         best_loss = min(val_loss, best_loss)
         best_local = val_local
         best_interface = val_interface
         best_global = val_global
         best_dev = val_dev
+        is_best = val_loss < best_loss
         
         if args.save_checkpoints:
             model.modules.save({
